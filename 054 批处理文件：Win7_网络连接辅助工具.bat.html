@@ -1,0 +1,246 @@
+<html>
+<head>
+  <title>054 批处理文件：Win7_网络连接辅助工具.bat</title>
+  <basefont face="Tahoma" size="2" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="exporter-version" content="Evernote Windows/270217 (zh-CN); Windows/6.1.7600;"/>
+  <style>
+    body, td {
+      font-family: Tahoma;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="1996"/>
+<h1>054 批处理文件：Win7_网络连接辅助工具.bat</h1>
+
+<div>
+<div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;"><p style="margin: 0px; padding: 5px 0px; line-height: 22px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Tahoma, Arial; font-size: 14px; background-color: rgb(255, 255, 255);">绿色单文件，方便Win7下清除DNS解析缓存、网页缓存、Cookies，修改DNS服务器，以及查看或清空hosts文件。<br>
+下载<strong style="font-weight: 600;">Win7_网络连接辅助工具.bat</strong>：<a href="http://pan.baidu.com/share/link?shareid=397919&amp;uk=304925281" style="color: rgb(0, 68, 153); text-decoration: none;" target="_blank" title="Win7_网络连接辅助工具.bat">百度网盘</a></p><div style="color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Tahoma, Arial; font-size: 14px; line-height: 21px; background-color: rgb(255, 255, 255); width: 590px;"><a href="http://dramatea.com/wp-content/uploads/2013/03/a0054.png" style="color: rgb(0, 68, 153); text-decoration: none;"><img src="054 批处理文件：Win7_网络连接辅助工具.bat_files/Image.png" type="image/png" height="415" style="cursor: default;cursor: default;" width="580"/></a><p style="margin: 0px; padding: 5px 0px; text-align: center; color: rgb(170, 170, 170); line-height: 22px;">截图（Win7_网络连接辅助工具.bat）</p></div><div><br></div><div>源代码：</div><div><br></div><div>::更新：http://dramatea.com/a/54<br>
+::作者：Dramatea<br>
+::本作品采用知识共享署名-非商业性使用-相同方式共享3.0 Unported 许可协议进行许可<br>
+::更多许可详情请查看 : http://creativecommons.org/licenses/by-nc-sa/3.0/<br>
+::------------------------------------------------------------------------------------<br>
+::Update: http://dramatea.com/a/54<br>
+::Author: Dramatea<br>
+::This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License<br>
+::View more : http://creativecommons.org/licenses/by-nc-sa/3.0/<br>
+::------------------------------------------------------------------------------------<br>
+::------------------------------------------------------------------------------------<br>
+@echo off<br>
+mode con cols=70 lines=35<br>
+title =Win7 网络连接辅助工具 by Dramatea<br>
+color 2f<br>
+set fgx=----------------------------------------------------------------------<br>
+cls<br>
+call :about<br>
+echo.<br>
+echo %fgx%<br>
+echo 提示：此 bat 工具需要以管理员权限运行（在此 bat 文件上右击选择“以管理员身份运行”）<br>
+echo.<br>
+goto cmdfinish<br>
+:cmdlist<br>
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+echo ++++++++++++++++++++++++++++++++主菜单++++++++++++++++++++++++++++++++<br>
+echo 1 清除之<br>
+echo [11] 清除 DNS 解析缓存<br>
+echo [12] 清理网页缓存<br>
+echo [13] 清理 Cookies<br>
+echo.<br>
+echo 2 设置 DNS 服务器( IPv4 )<br>
+echo [20] 查看当前 DNS 设置<br>
+echo [21] 修改为自动获取( DHCP )<br>
+echo [22] 修改为谷歌公共 DNS ( 8.8.8.8、8.8.8.4 )<br>
+echo [23] 修改为香港某公共 DNS (202.181.202.140、202.181.224.2 )<br>
+echo [24] 修改为 Norton DNS ( 198.153.192.1、198.153.194.1 )<br>
+echo [25] 修改为 OpenDNS ( 208.67.222.222、208.67.220.220 )<br>
+echo.<br>
+echo 3 hosts<br>
+echo [30] 查看当前 hosts 文件<br>
+echo [31] 打开 hosts 文件所在目录<br>
+echo [32] 替换 hosts 文件 （用于替换的文件：hosts.txt）<br>
+echo [33] 清空 hosts 文件<br>
+echo.<br>
+echo [9] 关于<br>
+echo [0] 退出<br>
+echo.<br>
+set /a choice= 9999<br>
+set /p choice=请选择功能（输入序号）：<br>
+echo %fgx%<br>
+if %choice%==0 exit<br>
+if %choice%==11 call :cmd11 &amp;amp; goto cmdfinish<br>
+if %choice%==12 call :cmd12 &amp;amp; goto cmdfinish<br>
+if %choice%==13 call :cmd13 &amp;amp; goto cmdfinish<br>
+if %choice%==20 call :cmd20 &amp;amp; goto cmdfinish<br>
+if %choice%==21 call :cmd21 &amp;amp; goto cmdfinish<br>
+if %choice%==22 call :cmd22 &amp;amp; goto cmdfinish<br>
+if %choice%==23 call :cmd23 &amp;amp; goto cmdfinish<br>
+if %choice%==24 call :cmd24 &amp;amp; goto cmdfinish<br>
+if %choice%==25 call :cmd25 &amp;amp; goto cmdfinish<br>
+if %choice%==30 call :cmd30 &amp;amp; goto cmdfinish<br>
+if %choice%==31 call :cmd31 &amp;amp; goto cmdfinish<br>
+if %choice%==32 call :cmd32 &amp;amp; goto cmdfinish<br>
+if %choice%==33 call :cmd33 &amp;amp; goto cmdfinish<br>
+if %choice%==9 call :about &amp;amp; goto cmdfinish<br>
+goto cmdlist<br>
+:cmdfinish<br>
+echo %fgx%<br>
+pause<br>
+goto cmdlist<br><br>
+:cmd11<br>
+ipconfig /flushdns<br>
+echo 清除 DNS 解析缓存结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd12<br>
+echo 清除网页缓存提示：<br>
+echo 若已长期未清理，本次清理可能会花费较多时间。<br>
+echo 清理过程中可以按 [Ctrl] + [C] 键强制终止。<br>
+echo %fgx%<br>
+pause<br>
+echo 开始清除网页缓存...<br>
+del /s /q &quot;%localappdata%\\Microsoft\Windows\\Temporary Internet Files\\*.*&quot;<br>
+echo 清除网页缓存结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd13<br>
+echo 清除 Cookies...<br>
+del /s /q &quot;%userprofile%\\Cookies\\*.*&quot;<br>
+del /s /q &quot;%localappdata%\\Temp\\Cookies\\*.*&quot;<br>
+del /s /q &quot;%appdata%\\Microsoft\\Windows\\Cookies\\*.*&quot;<br>
+echo 清除 Cookies 结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd2_choice_netid<br>
+echo 载入本机网络连接列表....<br>
+netsh interface ip show interface<br>
+echo %fgx%<br>
+set /a choice_netid=9999<br>
+set /p choice_netid=请选择网络连接（输入所对应的Idx）：<br>
+echo %fgx%<br>
+if %choice_netid%==9999 goto cmd2_end<br>
+goto :eof<br>
+:cmd2_end<br>
+echo 未选择网络连接，直接返回主菜单<br>
+echo %fgx%<br>
+goto cmdlist<br>
+exit<br><br>
+:cmd20<br>
+echo 设置 DNS 服务器——查看当前 DNS 设置<br>
+call :cmd2_choice_netid<br>
+netsh interface ip show dns name=%choice_netid%<br>
+goto :eof<br>
+exit<br><br>
+:cmd21<br>
+echo 设置 DNS 服务器——修改为自动获取( DHCP )<br>
+call :cmd2_choice_netid<br>
+echo -----当前配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo -----修改为自动获取( DHCP )...<br>
+netsh interface ip set dns name=%choice_netid% dhcp<br>
+echo -----修改后配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo 设置 DNS 服务器结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd22<br>
+echo 设置 DNS 服务器——修改为谷歌公共 DNS ( 8.8.8.8，8.8.8.4 )<br>
+call :cmd2_choice_netid<br>
+echo -----当前配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo -----修改为谷歌公共 DNS ( 8.8.8.8，8.8.8.4 )...<br>
+netsh interface ip set dns name=%choice_netid% static 8.8.8.8 both<br>
+netsh interface ip add dns name=%choice_netid% 8.8.8.4 index=2<br>
+echo -----修改后配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo 设置 DNS 服务器结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd23<br>
+echo 设置 DNS 服务器——修改为香港某公共 DNS ( 202.181.202.140, 202.181.224.2 )<br>
+call :cmd2_choice_netid<br>
+echo -----当前配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo -----修改为香港某公共 DNS ( 202.181.202.140, 202.181.224.2 )...<br>
+netsh interface ip set dns name=%choice_netid% static 202.181.202.140 both<br>
+netsh interface ip add dns name=%choice_netid% 202.181.224.2 index=2<br>
+echo -----修改后配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo 设置 DNS 服务器结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd24<br>
+echo 设置DNS服务器——修改为 Norton DNS ( 198.153.192.1、198.153.194.1 )<br>
+call :cmd2_choice_netid<br>
+echo -----当前配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo -----修改为 Norton DNS ( 198.153.192.1, 198.153.194.1 )...<br>
+netsh interface ip set dns name=%choice_netid% static 198.153.192.1 both<br>
+netsh interface ip add dns name=%choice_netid% 198.153.194.1 index=2<br>
+echo -----修改后配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo 设置 DNS 服务器结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd25<br>
+echo 设置 DNS 服务器——修改为 OpenDNS ( 208.67.222.222、208.67.220.220 )<br>
+call :cmd2_choice_netid<br>
+echo -----当前配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo -----修改为 OpenDNS ( 208.67.222.222, 208.67.220.220 )...<br>
+netsh interface ip set dns name=%choice_netid% static 208.67.222.222 both<br>
+netsh interface ip add dns name=%choice_netid% 208.67.220.220 index=2<br>
+echo -----修改后配置：<br>
+netsh interface ip show dns name=%choice_netid%<br>
+echo 设置 DNS 服务器结束<br>
+goto :eof<br>
+exit<br><br>
+:cmd30<br>
+echo hosts——查看当前 hosts 文件<br>
+start notepad.exe %windir%\\system32\\drivers\\etc\\hosts<br>
+echo 已启动记事本程序载入 hosts 文件<br>
+goto :eof<br>
+exit<br><br>
+:cmd31<br>
+echo hosts——打开 hosts 文件所在目录<br>
+start %windir%\\system32\\drivers\\etc<br>
+echo 已打开目录：%windir%\system32\drivers\etc<br>
+goto :eof<br>
+exit<br><br>
+:cmd32<br>
+echo hosts——替换 hosts 文件 （请确保本工具所在目录内有用于替换的文件：hosts.txt）<br>
+pause<br>
+copy /y hosts.txt %windir%\\system32\\drivers\\etc\hosts<br>
+goto :eof<br>
+exit<br><br>
+:cmd33<br>
+echo hosts——清空 hosts 文件<br>
+echo ---生成空 hosts 文件...<br>
+echo # WinNetTool has Re-Wrote this hosts file&amp;gt;emptyhosts<br>
+echo # ------------------------------------------------&amp;gt;&amp;gt;emptyhosts<br>
+echo # IP Hosts&amp;gt;&amp;gt;emptyhosts<br>
+echo # 127.0.0.1 localhost&amp;gt;&amp;gt;emptyhosts<br>
+echo ---替换当前 hosts 文件为空文件...<br>
+copy /y emptyhosts %windir%\\system32\\drivers\\etc\hosts<br>
+del emptyhosts&amp;gt;nul<br>
+echo.<br>
+echo 清空 hosts 文件结束(清空成功的标志是复制成功1个文件，否则为清空失败)<br>
+goto :eof<br>
+exit<br><br>
+:about<br>
+echo.<br>
+echo ┏━━━━━━━━━━ Win7 网络连接辅助工具 ━━━━━━━━━━┓<br>
+echo ┃ ┃<br>
+echo ┃ * 适用于 Windows 7 ┃<br>
+echo ┃ * 更新于 2013/01/15 ┃<br>
+echo ┃ http://dramatea.com/a/54 ┃<br>
+echo ┃ * 作者：Dramatea ┃<br>
+echo ┃ ┃<br>
+echo ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛<br>
+echo [ CC BY-NC-SA 3.0 ]<br>
+echo.<br>
+goto :eof<br>
+exit<br><br>
+exit</div><div><br></div></div>
+</div></body></html> 
